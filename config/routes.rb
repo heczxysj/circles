@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
   post 'user/new', to: 'user#create'
   resources :user
-  delete 'session/destroy', to: 'session#destroy' #, as: 'ddd'   路径会变成ddd_path
+  delete 'session/destroy', to: 'session#destroy' #, as: 'ddd'   路径=ddd_path
   resources :session
   namespace :admin do
     root 'users#index'
