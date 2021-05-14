@@ -1,8 +1,8 @@
 class UserController < ApplicationController
 
   before_action :auth_user, only: [:index]
-  #protect_from_forgery except: :index  ###除了index,controller里的其他action都需要验证
-  # protect_from_forgery only: :create  ####只有index需要验证
+  protect_from_forgery except: :index           ###除了index,controller里的其他action都需要验证
+  # protect_from_forgery only: :create          ####只有index需要验证
   def index
     # ||逻辑或 如果不传参数进来，默认使用||后面的参数：|| 10   如果不传参数进来，默认使用10
     @users = User.page(params[:page] || 1).per_page(params[:per_page] || 10).order("id desc")
