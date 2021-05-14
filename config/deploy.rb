@@ -1,7 +1,7 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.16.0"
 
-set :application, "circles"
+set :application, "my_circles"
 set :repo_url, "git@github.com:heczxysj/circles.git"
 
 # Default branch is :master
