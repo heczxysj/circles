@@ -9,9 +9,9 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
   encoding: utf8
-  host: 127.0.0.1
+  host: 192.168.50.250
   username: root
-  password: rootroot
+  password: bYcBd123
 
 development:
   <<: *default

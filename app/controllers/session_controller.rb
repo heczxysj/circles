@@ -1,6 +1,12 @@
 class SessionController < ApplicationController
-
+  
+  protect_from_forgery except: :index             ###除了index,controller里的其他action都需要验证
+  # protect_from_forgery only: :create              ####只有index需要验证
   def new
+  end
+
+  def index
+
   end
 
   def create
@@ -16,7 +22,8 @@ class SessionController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+  end
 
   def destroy
     session[:user_id] = nil
