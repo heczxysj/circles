@@ -16,10 +16,10 @@ set :puma_threads, [0, 16]
 set :puma_workers, 0
 set :puma_init_active_record, false
 set :puma_preload_app, true
-set :ssh_options, {
-  keys: %w(/home/ubuntu/.ssh/authorized_keys),
-  auth_methods: %w(publickey)
-}
+# set :ssh_options, {
+#   keys: %w(/home/ubuntu/.ssh/authorized_keys),
+#   auth_methods: %w(publickey)
+# }
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.
