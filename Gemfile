@@ -14,7 +14,7 @@ gem 'mysql2'
 # Use Puma as the app server
 #gem 'puma', '~> 3.7'
 
-gem 'capistrano3-puma', github: "seuros/capistrano-puma"
+# gem 'capistrano3-puma', github: "seuros/capistrano-puma"
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -40,6 +40,7 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'puma', '~> 3.11'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -51,11 +52,17 @@ end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'web-console', '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+
+  gem 'capistrano', '3.11.0'
+  gem 'capistrano3-puma', '3.1.1'
+  gem 'capistrano-rails', '1.4.0'
+  gem 'capistrano-rvm', '0.1.2'
+  
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
