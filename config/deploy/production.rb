@@ -1,5 +1,5 @@
 
-server '192.168.50.250', user: 'deploy', roles: %w{web app db}
+server '192.168.50.250', user: 'ubuntu', roles: %w{web app db}
 
 set :deploy_to, '/var/www/ethan/deploy/circles'     #部署的位置
 
