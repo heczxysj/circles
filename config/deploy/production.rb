@@ -1,7 +1,7 @@
 
 server '192.168.50.250', user: 'ubuntu', roles: %w{web app db}, primary: true
 # server '127.0.0.1', user: 'ethan', roles: %w{web app db}, primary: true
-
+set :port, 3000
 set :deploy_to, '/var/www/ethan/deploy/circles'     #部署的位置
 # set :deploy_to, '/Users/ethan/deploy'     #部署的位置
 # PUMA
