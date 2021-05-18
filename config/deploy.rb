@@ -7,12 +7,26 @@ set :repo_url, "git@github.com:heczxysj/circles.git"
 set :linked_files, %w{config/database.yml}       #需要做链接的文件，一般database.yml和部分配置文件
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
+
+namespace :puma do
+  desc 'Create Directories for Puma Pids and Socket'
+  task :make_dirs do
+    on roles(:app) do
+      execute "mkdir #{shared_path}/tmp/sockets -p"
+      execute "mkdir #{shared_path}/tmp/pids -p"
+    end
+  end
+  before :start, :make_dirs
+end
+
 namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
+      invoke 'puma:restart'
     end
   end
+
   after :restart, :'puma:restart'    #添加此项重启puma
   after :publishing, :restart
 
@@ -21,6 +35,17 @@ namespace :deploy do
     end
   end
 end
+
+# namespace :deploy do
+#
+#   desc 'Restart application'
+#   task :restart do
+#     on roles(:app), in: :sequence, wait: 5 do
+#       Rake::Task["puma:restart"].reenable <-コレを追記
+#       invoke 'puma:restart'
+#     end
+#   end
+
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
