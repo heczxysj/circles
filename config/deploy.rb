@@ -7,59 +7,59 @@ set :repo_url, "git@github.com:heczxysj/circles.git"
 set :linked_files, %w{config/database.yml}       #需要做链接的文件，一般database.yml和部分配置文件
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
-namespace :puma do
-  desc 'Create Directories for Puma Pids and Socket'
-  task :make_dirs do
-    on roles(:app) do
-      execute "mkdir #{shared_path}/tmp/sockets -p"
-      execute "mkdir #{shared_path}/tmp/pids -p"
-    end
-  end
-
-  before :start, :make_dirs
-end
-
-namespace :deploy do
-  desc "Make sure local git is in sync with remote."
-  task :check_revision do
-    on roles(:app) do
-      unless `git rev-parse HEAD` == `git rev-parse origin/master`
-        puts "WARNING: HEAD is not the same as origin/master"
-        puts "Run `git push` to sync changes."
-        exit
-      end
-    end
-  end
-
-  desc 'Initial Deploy'
-  task :initial do
-    on roles(:app) do
-      before 'deploy:restart', 'puma:start'
-      invoke 'deploy'
-    end
-  end
-
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      invoke 'puma:restart'
-    end
-  end
-
-  desc 'clear temp cache'
-  task :clear_cache do
-    on roles(:app), in: :sequence, wait: 1 do
-      execute "rm -rf #{shared_path}/tmp/cache/[^.]*"
-
-    end
-  end
-
-  before :starting,     :check_revision
-  after  :finishing,    :compile_assets
-  after  :finishing,    :cleanup
-  after  :finishing,    :clear_cache
-  after  :finishing,    :restart
-end
+# namespace :puma do
+#   desc 'Create Directories for Puma Pids and Socket'
+#   task :make_dirs do
+#     on roles(:app) do
+#       execute "mkdir #{shared_path}/tmp/sockets -p"
+#       execute "mkdir #{shared_path}/tmp/pids -p"
+#     end
+#   end
+#
+#   before :start, :make_dirs
+# end
+#
+# namespace :deploy do
+#   desc "Make sure local git is in sync with remote."
+#   task :check_revision do
+#     on roles(:app) do
+#       unless `git rev-parse HEAD` == `git rev-parse origin/master`
+#         puts "WARNING: HEAD is not the same as origin/master"
+#         puts "Run `git push` to sync changes."
+#         exit
+#       end
+#     end
+#   end
+#
+#   desc 'Initial Deploy'
+#   task :initial do
+#     on roles(:app) do
+#       before 'deploy:restart', 'puma:start'
+#       invoke 'deploy'
+#     end
+#   end
+#
+#   desc 'Restart application'
+#   task :restart do
+#     on roles(:app), in: :sequence, wait: 5 do
+#       invoke 'puma:restart'
+#     end
+#   end
+#
+#   desc 'clear temp cache'
+#   task :clear_cache do
+#     on roles(:app), in: :sequence, wait: 1 do
+#       execute "rm -rf #{shared_path}/tmp/cache/[^.]*"
+#
+#     end
+#   end
+#
+#   before :starting,     :check_revision
+#   after  :finishing,    :compile_assets
+#   after  :finishing,    :cleanup
+#   after  :finishing,    :clear_cache
+#   after  :finishing,    :restart
+# end
 
 
 
@@ -80,22 +80,22 @@ end
 #   before :start, :make_dirs
 # end
 
-# namespace :deploy do
-#   desc 'Restart application'
-#   task :restart do
-#     on roles(:app), in: :sequence, wait: 5 do
-#       invoke 'puma:restart'
-#     end
-#   end
-#
-#   after :restart, :'puma:restart'    #添加此项重启puma
-#   after :publishing, :restart
-#
-#   after :restart, :clear_cache do
-#     on roles(:web), in: :groups, limit: 3, wait: 10 do
-#     end
-#   end
-# end
+namespace :deploy do
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      invoke 'puma:restart'
+    end
+  end
+
+  after :restart, :'puma:restart'    #添加此项重启puma
+  after :publishing, :restart
+
+  after :restart, :clear_cache do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
+    end
+  end
+end
 
 # namespace :deploy do
 #
