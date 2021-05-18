@@ -17,7 +17,7 @@ set :deploy_to, '/var/www/ethan/deploy/circles'     #部署的位置
 # set :puma_workers, 0
 # set :puma_init_active_record, false
 # set :puma_preload_app, true
-set :nginx_server_name, "example.com"
+# set :nginx_server_name, "example.com"
 set :ssh_options, {
   keys: %w(/Users/ethan/bycbd_ubuntu.pem),  #本机链接服务器的证书
   forward_agent: false
