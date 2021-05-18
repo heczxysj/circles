@@ -1,8 +1,9 @@
 
-server '192.168.50.250', user: 'ubuntu', roles: %w{web app db}
+server '192.168.50.250', user: 'ubuntu', roles: %w{web app db}, primary: true
+# server '127.0.0.1', user: 'ethan', roles: %w{web app db}, primary: true
 
 set :deploy_to, '/var/www/ethan/deploy/circles'     #部署的位置
-
+# set :deploy_to, '/Users/ethan/deploy'     #部署的位置
 # PUMA
 set :puma_state, "#{shared_path}/tmp/pids/puma.state"
 set :puma_pid,   "#{shared_path}/tmp/pids/puma.pid"
@@ -16,10 +17,10 @@ set :puma_threads, [0, 16]
 set :puma_workers, 0
 set :puma_init_active_record, false
 set :puma_preload_app, true
-# set :ssh_options, {
-#   keys: %w(/home/ubuntu/.ssh/authorized_keys),
-#   auth_methods: %w(publickey)
-# }
+set :ssh_options, {
+  keys: %w(/Users/ethan/bycbd_ubuntu.pem),  #本机链接服务器的证书
+  forward_agent: false
+}
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.
