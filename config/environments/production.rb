@@ -28,7 +28,8 @@ Rails.application.configure do
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
+  # 开启预编译，如果为false可能会报错ActionView::Template::Error (The asset "application.css" is not present in the asset pipeline. )
+  config.assets.compile = true
 
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
