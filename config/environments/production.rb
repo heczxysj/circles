@@ -29,6 +29,7 @@ Rails.application.configure do
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   # 开启预编译，如果为false可能会报错ActionView::Template::Error (The asset "application.css" is not present in the asset pipeline. )
+  # 如果没报错可以置位false
   config.assets.compile = true
 
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
