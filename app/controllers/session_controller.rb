@@ -6,7 +6,7 @@ class SessionController < ApplicationController
   end
 
   def index
-
+    @users = User.all
   end
 
   def create
@@ -23,6 +23,7 @@ class SessionController < ApplicationController
   end
 
   def show
+    @users = User.all
   end
 
   def destroy

@@ -3,7 +3,8 @@ class Admin::UsersController < ApplicationController
   layout 'admin'
 
   def index
-    @users = User.page(params[:page] || 1).per_page(params[:per_page] || 10).order('id asc')
+    # @users = User.page(params[:page] || 1).per_page(params[:per_page] || 10).order('id asc')
+    @users = User.all
   end
 
   def search
