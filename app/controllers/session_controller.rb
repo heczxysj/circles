@@ -1,6 +1,6 @@
 class SessionController < ApplicationController
   
-  protect_from_forgery except: :index             ###除了index,controller里的其他action都需要验证
+  #protect_from_forgery except: :index             ###除了index,controller里的其他action都需要验证
   # protect_from_forgery only: :create              ####只有index需要验证
   def new
   end
@@ -14,11 +14,13 @@ class SessionController < ApplicationController
     if @user
       session[:user_id] = @user.id
       cookies[:user_username] = @user.username
-      flash[:notice] = "登录成功"
-      redirect_to root_path
+      # flash[:notice] = "登录成功"
+      # redirect_to root_path
+      render json: { status: 200, user_id: @user.id, user_name: @user.username }
     else
-      flash[:notice] = "用户名或密码不正确"
-      render action: :new   #Rendering 是特别要告诉Controller 中的methods，要哪个view file来显示给用户。We can show Views as we wish!
+      # flash[:notice] = "用户名或密码不正确"
+      # render action: :new   #Rendering 是特别要告诉Controller 中的methods，要哪个view file来显示给用户。We can show Views as we wish!
+      render json: { status: 401 }
     end
   end
 
